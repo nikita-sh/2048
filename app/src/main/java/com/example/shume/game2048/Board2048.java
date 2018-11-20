@@ -1,7 +1,9 @@
 package com.example.shume.game2048;
 
+import android.service.quicksettings.Tile;
 import android.support.annotation.NonNull;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Observable;
@@ -78,19 +80,51 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         return tiles[row][col];
     }
 
-    // TODO: Complete mergeLeft()
-    private void mergeLeft() {}
+    public void mergeLeft() {
+        pushLeft();
+        for (int row = 0; row != Board2048.NUM_ROWS; row++) {
+            for (int col = 1; col != Board2048.NUM_COLS; col++) {
+                Tile2048 prevTile = tiles[row][col - 1];
+                Tile2048 currTile = tiles[row][col];
+                if (prevTile.getBackground() == currTile.getBackground() & prevTile.getBackground() != -1) {
+                    tiles[row][col - 1] = new Tile2048(2*prevTile.getBackground());
+                    tiles[row][col] = new Tile2048(-1);
+                }
+            }
+        }
+        pushLeft();
+        spawnTile();
+    }
+
+    private void pushLeft() {
+        for (int row = 0; row != Board2048.NUM_ROWS; row++) {
+            int farthest = 0;
+            for (int col = 0; col != Board2048.NUM_COLS; col++) {
+                if (tiles[row][col].getBackground() != -1) {
+                    Tile2048 tempTile = tiles[row][farthest];
+                    tiles[row][farthest] = tiles[row][col];
+                    tiles[row][col] = tempTile;
+                    farthest++;
+                }
+            }
+        }
+    }
 
     // TODO: Complete mergeRight()
-    private void mergeRight() {}
+    public void mergeRight() {}
+
+    private void pushRight() {}
 
     // TODO: Complete mergeUp()
-    private void mergeUp() {}
+    public void mergeUp() {}
+
+    private void pushUp(){}
 
     // TODO: Complete mergeDown()
-    private void mergeDown() {}
+    public void mergeDown() {}
 
-    // TODO: Complete spawnTile()
+    private void pushDown() {}
+
     private void spawnTile() {
         ArrayList<int[]> emptySpots = getEmptySpots();
         double ran = Math.random();
@@ -171,7 +205,10 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
             } else if (col == Board2048.NUM_COLS) {
                 row++;
                 col = 0;
-            } else {}
+            } else {
+                col++;
+            }
+            return returnTile;
         }
     }
 }
