@@ -111,9 +111,35 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
     }
 
     // TODO: Complete mergeRight()
-    public void mergeRight() {}
+    public void mergeRight() {
+        pushRight();
+        for (int row = 0; row != Board2048.NUM_ROWS; row++) {
+            for (int col = tiles[row].length - 2; col >= 0; col--) {
+                Tile2048 prevTile = tiles[row][col + 1];
+                Tile2048 currTile = tiles[row][col];
+                if (prevTile.getBackground() == currTile.getBackground() & prevTile.getBackground() != -1) {
+                    tiles[row][col + 1] = new Tile2048(2*prevTile.getBackground());
+                    tiles[row][col] = new Tile2048(-1);
+                }
+            }
+        }
+        pushRight();
+        spawnTile();
+    }
 
-    private void pushRight() {}
+    private void pushRight() {
+        for (int row = 0; row != Board2048.NUM_ROWS; row++) {
+            int farthest = tiles[row].length;
+            for (int col = tiles[row].length - 1; col >= 0; col--) {
+                if (tiles[row][col].getBackground() != -1) {
+                    Tile2048 tempTile = tiles[row][farthest];
+                    tiles[row][farthest] = tiles[row][col];
+                    tiles[row][col] = tempTile;
+                    farthest--;
+                }
+            }
+        }
+    }
 
     // TODO: Complete mergeUp()
     public void mergeUp() {}
