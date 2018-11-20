@@ -56,7 +56,7 @@ public class Tile2048 implements Comparable<Tile2048>, Serializable {
      * @param backgroundId
      */
     Tile2048(int backgroundId) {
-        id = backgroundId + 1;
+        id = (int) Math.pow(2, backgroundId);
         tile(backgroundId);
     }
 
@@ -66,13 +66,10 @@ public class Tile2048 implements Comparable<Tile2048>, Serializable {
      * @param backgroundId
      */
     private void tile(int backgroundId) {
-        Object[] pics = {R.drawable.tile_1, R.drawable.tile_2, R.drawable.tile_3, R.drawable.tile_4,
-                R.drawable.tile_5, R.drawable.tile_6, R.drawable.tile_7, R.drawable.tile_8,
-                R.drawable.tile_9, R.drawable.tile_10, R.drawable.tile_11, R.drawable.tile_12,
-                R.drawable.tile_13, R.drawable.tile_14, R.drawable.tile_15, R.drawable.tile_def};
-        if (backgroundId == -1) {
-            background = R.drawable.tile_def;
-        } else {background = (int) pics[backgroundId];}
+        Object[] pics = {R.drawable.block_blank, R.drawable.block_2, R.drawable.block_4, R.drawable.block_8,
+                R.drawable.block_16, R.drawable.block_32, R.drawable.block_64, R.drawable.block_128, R.drawable.block_256,
+                R.drawable.block_512, R.drawable.block_1024, R.drawable.block_2048, R.drawable.block_4096};
+        background = (int) pics[backgroundId];
     }
 
     @Override
