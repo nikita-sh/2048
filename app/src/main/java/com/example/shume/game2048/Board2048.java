@@ -97,9 +97,9 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
     }
 
     private void pushLeft() {
-        for (int row = 0; row != Board2048.NUM_ROWS; row++) {
+        for (int row = 0; row < Board2048.NUM_ROWS; row++) {
             int farthest = 0;
-            for (int col = 0; col != Board2048.NUM_COLS; col++) {
+            for (int col = 0; col < Board2048.NUM_COLS; col++) {
                 if (tiles[row][col].getBackground() != -1) {
                     Tile2048 tempTile = tiles[row][farthest];
                     tiles[row][farthest] = tiles[row][col];
@@ -113,7 +113,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
     // TODO: Complete mergeRight()
     public void mergeRight() {
         pushRight();
-        for (int row = 0; row != Board2048.NUM_ROWS; row++) {
+        for (int row = 0; row < Board2048.NUM_ROWS; row++) {
             for (int col = tiles[row].length - 2; col >= 0; col--) {
                 Tile2048 prevTile = tiles[row][col + 1];
                 Tile2048 currTile = tiles[row][col];
@@ -128,7 +128,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
     }
 
     private void pushRight() {
-        for (int row = 0; row != Board2048.NUM_ROWS; row++) {
+        for (int row = 0; row < Board2048.NUM_ROWS; row++) {
             int farthest = tiles[row].length;
             for (int col = tiles[row].length - 1; col >= 0; col--) {
                 if (tiles[row][col].getBackground() != -1) {
@@ -142,14 +142,66 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
     }
 
     // TODO: Complete mergeUp()
-    public void mergeUp() {}
+    public void mergeUp() {
+        pushUp();
+        for (int col = 0; col < Board2048.NUM_COLS; col++) {
+            for (int row = 1; row < Board2048.NUM_ROWS; row++) {
+                Tile2048 prevTile = tiles[row - 1][col];
+                Tile2048 currTile = tiles[row][col];
+                if (prevTile.getBackground() == currTile.getBackground() & prevTile.getBackground() != -1) {
+                    tiles[row - 1][col] = new Tile2048(2*prevTile.getBackground());
+                    tiles[row][col] = new Tile2048(-1);
+                }
+            }
+        }
+        pushUp();
+        spawnTile();
+    }
 
-    private void pushUp(){}
+    private void pushUp() {
+        for (int col = 0; col < Board2048.NUM_COLS; col++) {
+            int farthest = 0;
+            for (int row = 0; row < Board2048.NUM_ROWS; row++) {
+                if (tiles[row][col].getBackground() != -1) {
+                    Tile2048 tempTile = tiles[row][farthest];
+                    tiles[row][farthest] = tiles[row][col];
+                    tiles[row][col] = tempTile;
+                    farthest++;
+                }
+            }
+        }
+    }
 
     // TODO: Complete mergeDown()
-    public void mergeDown() {}
+    public void mergeDown() {
+        pushDown();
+        for (int col = 0; col < Board2048.NUM_COLS; col++) {
+            for (int row = Board2048.NUM_ROWS - 2; row >= 0; row--) {
+                Tile2048 prevTile = tiles[row + 1][col];
+                Tile2048 currTile = tiles[row][col];
+                if (prevTile.getBackground() == currTile.getBackground() & prevTile.getBackground() != -1) {
+                    tiles[row + 1][col] = new Tile2048(2*prevTile.getBackground());
+                    tiles[row][col] = new Tile2048(-1);
+                }
+            }
+        }
+        pushDown();
+        spawnTile();
+    }
 
-    private void pushDown() {}
+    private void pushDown() {
+        for (int col = 0; col < Board2048.NUM_COLS; col++) {
+            int farthest = Board2048.NUM_ROWS - 1;
+            for (int row = Board2048.NUM_ROWS - 1; row >= 0; row--) {
+                if (tiles[row][col].getBackground() != -1) {
+                    Tile2048 tempTile = tiles[row][farthest];
+                    tiles[row][farthest] = tiles[row][col];
+                    tiles[row][col] = tempTile;
+                    farthest--;
+                }
+            }
+        }
+    }
 
     private void spawnTile() {
         ArrayList<int[]> emptySpots = getEmptySpots();

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-class BoardManager implements Serializable {
+class BoardManager2048 implements Serializable {
 
     public int size = Board2048.NUM_COLS;
 
@@ -48,7 +48,7 @@ class BoardManager implements Serializable {
      * @param board the board
      */
 
-    BoardManager(Board2048 board) {
+    BoardManager2048(Board2048 board) {
         this.board = board;
         this.maxUndos = 3;
         this.unlimitedMoves = false;
@@ -57,7 +57,7 @@ class BoardManager implements Serializable {
     /**
      * Manage a new shuffled board with options to select number of undos.
      */
-    BoardManager(boolean unlimited, int maxUndos) {
+    BoardManager2048(boolean unlimited, int maxUndos) {
         List<Tile2048> tiles = new ArrayList<>();
         final int numTiles = Board2048.NUM_ROWS * Board2048.NUM_COLS;
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {
@@ -82,7 +82,7 @@ class BoardManager implements Serializable {
     }
 
     public static void setNumMoves(int numMoves) {
-        BoardManager.numMoves = numMoves;
+        BoardManager2048.numMoves = numMoves;
     }
 
 
