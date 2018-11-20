@@ -80,6 +80,9 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         return tiles[row][col];
     }
 
+    /**
+     * Merges tiles together when a left swipe is intitiated
+     */
     public void mergeLeft() {
         pushLeft();
         for (int row = 0; row != Board2048.NUM_ROWS; row++) {
@@ -96,12 +99,17 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         spawnTile();
     }
 
+    /**
+     * Helper function for mergeLeft() that pushes all tile to as far left as possible
+     */
     private void pushLeft() {
         for (int row = 0; row < Board2048.NUM_ROWS; row++) {
             int farthest = 0;
             for (int col = 0; col < Board2048.NUM_COLS; col++) {
+                // if it's not a blank tile
                 if (tiles[row][col].getBackground() != -1) {
                     Tile2048 tempTile = tiles[row][farthest];
+                    // swap the tiles
                     tiles[row][farthest] = tiles[row][col];
                     tiles[row][col] = tempTile;
                     farthest++;
@@ -110,7 +118,9 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         }
     }
 
-    // TODO: Complete mergeRight()
+    /**
+     * Merges tiles together when a right swipe is intitiated
+     */
     public void mergeRight() {
         pushRight();
         for (int row = 0; row < Board2048.NUM_ROWS; row++) {
@@ -127,6 +137,10 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         spawnTile();
     }
 
+    /**
+     * Helper function for mergeRight to swap the blank tile with the tile furthest to the right
+     * that is not blank
+     */
     private void pushRight() {
         for (int row = 0; row < Board2048.NUM_ROWS; row++) {
             int farthest = tiles[row].length;
@@ -141,7 +155,9 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         }
     }
 
-    // TODO: Complete mergeUp()
+    /**
+     * Merges tiles together when a upwards swipe is intitiated
+     */
     public void mergeUp() {
         pushUp();
         for (int col = 0; col < Board2048.NUM_COLS; col++) {
@@ -158,6 +174,9 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         spawnTile();
     }
 
+    /**
+     * Helper function for mergeUp() to merge together two tiles
+     */
     private void pushUp() {
         for (int col = 0; col < Board2048.NUM_COLS; col++) {
             int farthest = 0;
@@ -172,8 +191,9 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         }
     }
 
-    // TODO: Complete mergeDown()
-    public void mergeDown() {
+    /**
+     * Merges tiles together when a down swipe is intitiated
+     */    public void mergeDown() {
         pushDown();
         for (int col = 0; col < Board2048.NUM_COLS; col++) {
             for (int row = Board2048.NUM_ROWS - 2; row >= 0; row--) {
@@ -189,6 +209,9 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         spawnTile();
     }
 
+    /**
+     * Helper function for mergeDown() to merge together two tiles in a vertical direction
+     */
     private void pushDown() {
         for (int col = 0; col < Board2048.NUM_COLS; col++) {
             int farthest = Board2048.NUM_ROWS - 1;
@@ -203,6 +226,9 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         }
     }
 
+    /**
+     * Randomly spawn a new tile with 80% it's a 2 and 20% it's a 4
+     */
     private void spawnTile() {
         ArrayList<int[]> emptySpots = getEmptySpots();
         double ran = Math.random();
@@ -211,6 +237,10 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         this.tiles[emptySpots.get(ranIndex)[0]][emptySpots.get(ranIndex)[1]] = newTile;
     }
 
+    /**
+     * Returns an array of all of the empty spots in the board
+     * @return ArrayList
+     */
     private ArrayList<int[]> getEmptySpots() {
         ArrayList empty = new ArrayList();
         for (int row = 0; row != Board2048.NUM_ROWS; row++) {
@@ -224,6 +254,10 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         return empty;
     }
 
+    /**
+     * Returns whether or not a 2048 (or higher) is reached
+     * @return boolean
+     */
     public boolean gameWon() {
         boolean won = false;
         outer:
@@ -236,6 +270,50 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
             }
         }
         return won;
+    }
+
+    /**
+     * Returns whether or not the board is in a state of no more moves
+     * @return boolean
+     */
+    public boolean isStuck() {
+        return isStuckHorizontal() && isStuckVertical();
+    }
+
+    /**
+     * Checks whether there are any ways to merge horizontal tiles
+     * @return boolean
+     */
+    private boolean isStuckHorizontal() {
+        boolean stuck = true;
+        outer:
+        for (int row = 0; row != Board2048.NUM_ROWS; row++) {
+            for (int col = 0; col != Board2048.NUM_COLS - 1; col++) {
+                if (tiles[row][col].getBackground() == tiles[row][col + 1].getBackground()) {
+                    stuck = false;
+                    break outer;
+                }
+            }
+        }
+        return !stuck;
+    }
+
+    /**
+     * Checks whether there are ways to merge vertical tiles
+     * @return boolean
+     */
+    private boolean isStuckVertical() {
+        boolean stuck = true;
+        outer:
+        for (int col = 0; col != Board2048.NUM_COLS; col++) {
+            for (int row = 0; row != Board2048.NUM_ROWS - 1; row++) {
+                if (tiles[row][col].getBackground() == tiles[row + 1][col].getBackground()) {
+                    stuck = false;
+                    break outer;
+                }
+            }
+        }
+        return !stuck;
     }
 
     @Override
@@ -256,7 +334,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
     }
 
     /**
-     * Iterator for Board. Iterates over the tiles on the board.
+     * Iterator for Board. Iterates over the tiles on the board in row major order.
      */
     public class TileIterator implements Iterator<Tile2048> {
 
