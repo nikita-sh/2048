@@ -41,32 +41,32 @@ public class LoginActivity extends AppCompatActivity{
         }
         users.addUser("admin", "admin");
         setContentView(R.layout.activity_landing);
-        addSignInButtonListener();
+//        addSignInButtonListener();
         addSignUpButtonListener();
     }
 
-    /**
-     * Activates the Sign in button.
-     */
-    private void addSignInButtonListener() {
-        Button signInButton = findViewById(R.id.signInButton);
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText username = findViewById(R.id.email);
-                EditText pass = findViewById(R.id.pass);
-                if (!users.hasUser(username.getText().toString())) {
-                    makeNoAccountToast();
-                } else if (users.checkCredentials(username.getText().toString(), pass.getText().toString())) {
-                    users.setCurrentUser(username.getText().toString());
-                    setSaveFilename(UserManager.getCurrentUser());
-                    switchToSlidingTiles();
-                } else {
-                    makeIncorrectPasswordToast();
-                }
-            }
-        });
-    }
+//    /**
+//     * Activates the Sign in button.
+//     */
+//    private void addSignInButtonListener() {
+//        Button signInButton = findViewById(R.id.signInButton);
+//        signInButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                EditText username = findViewById(R.id.email);
+//                EditText pass = findViewById(R.id.pass);
+//                if (!users.hasUser(username.getText().toString())) {
+//                    makeNoAccountToast();
+//                } else if (users.checkCredentials(username.getText().toString(), pass.getText().toString())) {
+//                    users.setCurrentUser(username.getText().toString());
+//                    setSaveFilename(UserManager.getCurrentUser());
+//                    switchToSlidingTiles();
+//                } else {
+//                    makeIncorrectPasswordToast();
+//                }
+//            }
+//        });
+//    }
 
     /**
      * Activates the Sign up button.
@@ -152,8 +152,8 @@ public class LoginActivity extends AppCompatActivity{
      * Sets the save filename, based on which user is the current active user.
      * @param filename The filename we wish to change to.
      */
-    public void setSaveFilename(String filename) {
-        StartingActivity.SAVE_FILENAME = filename + ".ser";
-        StartingActivity.TEMP_SAVE_FILENAME = filename + "_temp.ser";
-    }
+//    public void setSaveFilename(String filename) {
+//        StartingActivity.SAVE_FILENAME = filename + ".ser";
+//        StartingActivity.TEMP_SAVE_FILENAME = filename + "_temp.ser";
+//    }
 }

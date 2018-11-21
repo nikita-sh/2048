@@ -19,7 +19,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 // This is our "GameActivity"
-public class MainActivity2048 extends AppCompatActivity implements Observer{
+// implements Observer
+public class MainActivity2048 extends AppCompatActivity {
 
     /**
      * The board manager for 2048.
@@ -181,10 +182,10 @@ public class MainActivity2048 extends AppCompatActivity implements Observer{
         }
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        autoSave(StartingActivity.SAVE_FILENAME);
-        display();
-
-    }
+//    @Override
+//    public void update(Observable o, Object arg) {
+//        autoSave(StartingActivity.SAVE_FILENAME);
+//        display();
+//
+//    }
 }
