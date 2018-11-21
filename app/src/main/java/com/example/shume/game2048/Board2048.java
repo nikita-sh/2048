@@ -295,7 +295,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 }
             }
         }
-        return !stuck;
+        return stuck;
     }
 
     /**
@@ -313,7 +313,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 }
             }
         }
-        return !stuck;
+        return stuck;
     }
 
     @Override
