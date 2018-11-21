@@ -18,31 +18,6 @@ class BoardManager2048 implements Serializable {
     private Board2048 board;
 
     /**
-     * The sequence of moves made.
-     */
-    private ArrayList<Integer> moves;
-
-    /**
-     * Indicates whether unlimited moves are allowed.
-     */
-    private boolean unlimitedMoves;
-
-    /**
-     * The number of undo moves allowed
-     */
-    private int maxUndos;
-
-    /**
-     * The number of undos used.
-     */
-    private int undosLeft = 0;
-
-    /**
-     * Total count of moves, including undos.
-     */
-    private static int numMoves = 0;
-
-    /**
      * Manage a default (3 undos allowed) board that has been pre-populated.
      *
      * @param board the board
@@ -50,41 +25,7 @@ class BoardManager2048 implements Serializable {
 
     BoardManager2048(Board2048 board) {
         this.board = board;
-        this.maxUndos = 3;
-        this.unlimitedMoves = false;
     }
-
-    /**
-     * Manage a new shuffled board with options to select number of undos.
-     */
-    BoardManager2048(boolean unlimited, int maxUndos) {
-        List<Tile2048> tiles = new ArrayList<>();
-        final int numTiles = Board2048.NUM_ROWS * Board2048.NUM_COLS;
-        for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-            tiles.add(new Tile2048(tileNum));
-        }
-        Collections.shuffle(tiles);
-        this.board = new Board2048(tiles);
-        this.moves = new ArrayList<>();
-        this.maxUndos = maxUndos;
-        this.unlimitedMoves = unlimited;
-    }
-
-    /**
-     * The number of total moves made including undos.
-     */
-    public static int getNumMoves() {
-        return numMoves;
-    }
-
-    public static void resetNumMoves() {
-        numMoves = 0;
-    }
-
-    public static void setNumMoves(int numMoves) {
-        BoardManager2048.numMoves = numMoves;
-    }
-
 
     /**
      * Return the current board.
@@ -140,31 +81,4 @@ class BoardManager2048 implements Serializable {
         int col = position % Board2048.NUM_COLS;
     }
 
-
-    /**
-     * Process an undo command.
-     */
-    // TODO: Get Jamal or Pavel to update undoMove() for 2048
-//    void undoMove() {
-//        setNumMoves(getNumMoves() + 1);
-//        if (unlimitedMoves || undosLeft > 0) {
-//            int colUndo = this.moves.remove(this.moves.size() - 1);
-//            int rowUndo = this.moves.remove(this.moves.size() - 1);
-//            this.board.swapTiles(this.board.getBlankRow(), this.board.getBlankCol(),
-//                    rowUndo, colUndo);
-//            if (!unlimitedMoves) {
-//                undosLeft--;
-//            }
-//        } else {
-//            //throw out of bounds exception as if we were trying to remove element from empty list
-//            throw new IndexOutOfBoundsException();
-//        }
-//    }
-
-    /**
-     * Return the number of Moves made
-     */
-    public int getSizeMoves(){
-        return this.moves.size();
-    }
 }
