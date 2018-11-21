@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">game2048</string>
+    <string name="username">Username</string>
+    <string name="finish">finish</string>
+    <string name="enter_your_credentials">Enter Your Credentials</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password">Password</string>
+
+    <string name="please_sign_in_if_you_have_an_account_or_sign_up_if_you_re_new">Please sign in if you have an account, or sign up if you\'re new.</string>
+    <string name="welcome">Welcome</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="start_game">Start Game</string>
+    <string name="unlimited">Unlimited</string>
+    <string name="enter_number_of_undos_default_3">Enter number of undos (default 3)</string>
+    <string name="select_the_size_of_the_board">Select the Size of the Board:</string>
+    <string name="welcome_to_2048">Welcome to 2048!</string>
+    <string name="new_game">New Game</string>
+    <string name="load_saved">load saved</string>
+    <string name="save_game">Save Game</string>
+    <string name="leaderboard">leaderboard</string>
 </resources>
