@@ -91,7 +91,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 Tile2048 currTile = tiles[row][col];
                 if (prevTile.getId() == currTile.getId() & prevTile.getId() != 0) {
                     tiles[row][col - 1] = new Tile2048(2*prevTile.getBackground());
-                    tiles[row][col] = new Tile2048(-1);
+                    tiles[row][col] = new Tile2048(0);
                 }
             }
         }
@@ -129,7 +129,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 Tile2048 currTile = tiles[row][col];
                 if (prevTile.getId() == currTile.getId() & prevTile.getId() != 0) {
                     tiles[row][col + 1] = new Tile2048(2*prevTile.getBackground());
-                    tiles[row][col] = new Tile2048(-1);
+                    tiles[row][col] = new Tile2048(0);
                 }
             }
         }
@@ -166,7 +166,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 Tile2048 currTile = tiles[row][col];
                 if (prevTile.getId() == currTile.getId() & prevTile.getId() != 0) {
                     tiles[row - 1][col] = new Tile2048(2*prevTile.getBackground());
-                    tiles[row][col] = new Tile2048(-1);
+                    tiles[row][col] = new Tile2048(0);
                 }
             }
         }
@@ -201,7 +201,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 Tile2048 currTile = tiles[row][col];
                 if (prevTile.getId() == currTile.getId() & prevTile.getId() != 0) {
                     tiles[row + 1][col] = new Tile2048(2*prevTile.getBackground());
-                    tiles[row][col] = new Tile2048(-1);
+                    tiles[row][col] = new Tile2048(0);
                 }
             }
         }
@@ -245,7 +245,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         ArrayList empty = new ArrayList();
         for (int row = 0; row != Board2048.NUM_ROWS; row++) {
             for (int col = 0; col != Board2048.NUM_COLS; col++) {
-                if (this.tiles[row][col].getBackground() == -1) {
+                if (this.tiles[row][col].getBackground() == 0) {
                     int[] pos = {row, col};
                     empty.add(pos);
                 }
