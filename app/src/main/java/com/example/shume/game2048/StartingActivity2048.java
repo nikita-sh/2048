@@ -37,6 +37,7 @@ public class StartingActivity2048 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        boardManager = new BoardManager2048();
         saveToFile(TEMP_SAVE_FILENAME);
 
         setContentView(R.layout.activity_starting_);
@@ -141,10 +142,11 @@ public class StartingActivity2048 extends AppCompatActivity {
      * Switch to the GameActivity view to play the game.
      */
     private void switchToGame() {
-        Intent tmp = new Intent(this, GameActivity.class);
+        Intent tmp = new Intent(this, GameActivity2048.class);
         saveToFile(TEMP_SAVE_FILENAME);
         startActivity(tmp);
     }
+
 
 //    /**
 //     * Switches to the settings select activity.

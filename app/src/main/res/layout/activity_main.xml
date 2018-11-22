@@ -19,7 +19,7 @@
         android:layout_marginTop="138dp"
         android:layout_marginBottom="120dp"
         android:visibility="visible"
-        tools:context="com.example.shume.game2048.GameActivity" />
+        tools:context="com.example.shume.game2048.GameActivity2048" />
 
     <!--<Button-->
         <!--android:id="@+id/undoButton"-->

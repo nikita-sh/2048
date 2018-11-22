@@ -229,7 +229,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
     /**
      * Randomly spawn a new tile with 80% it's a 2 and 20% it's a 4
      */
-    private void spawnTile() {
+    public void spawnTile() {
         ArrayList<int[]> emptySpots = getEmptySpots();
         double ran = Math.random();
         Tile2048 newTile = ran >= 0.8 ? new Tile2048(2) : new Tile2048(1);
@@ -245,7 +245,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         ArrayList empty = new ArrayList();
         for (int row = 0; row != Board2048.NUM_ROWS; row++) {
             for (int col = 0; col != Board2048.NUM_COLS; col++) {
-                if (this.tiles[row][col].getBackground() == 0) {
+                if (this.tiles[row][col].getId() == 1) {
                     int[] pos = {row, col};
                     empty.add(pos);
                 }
