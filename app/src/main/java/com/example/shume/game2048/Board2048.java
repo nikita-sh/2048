@@ -89,8 +89,8 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
             for (int col = 1; col != Board2048.NUM_COLS; col++) {
                 Tile2048 prevTile = tiles[row][col - 1];
                 Tile2048 currTile = tiles[row][col];
-                if (prevTile.getId() == currTile.getId() & prevTile.getId() != 0) {
-                    tiles[row][col - 1] = new Tile2048(2*prevTile.getBackground());
+                if (prevTile.getId() == currTile.getId() & prevTile.getId() != 1) {
+                    tiles[row][col - 1] = new Tile2048(prevTile.getBackground() + 1);
                     tiles[row][col] = new Tile2048(0);
                 }
             }
@@ -107,7 +107,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
             int farthest = 0;
             for (int col = 0; col < Board2048.NUM_COLS; col++) {
                 // if it's not a blank tile
-                if (tiles[row][col].getId() != 0) {
+                if (tiles[row][col].getId() != 1) {
                     Tile2048 tempTile = tiles[row][farthest];
                     // swap the tiles
                     tiles[row][farthest] = tiles[row][col];
@@ -128,7 +128,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 Tile2048 prevTile = tiles[row][col + 1];
                 Tile2048 currTile = tiles[row][col];
                 if (prevTile.getId() == currTile.getId() & prevTile.getId() != 0) {
-                    tiles[row][col + 1] = new Tile2048(2*prevTile.getBackground());
+                    tiles[row][col - 1] = new Tile2048(prevTile.getBackground() + 1);
                     tiles[row][col] = new Tile2048(0);
                 }
             }
@@ -145,7 +145,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         for (int row = 0; row < Board2048.NUM_ROWS; row++) {
             int farthest = tiles[row].length;
             for (int col = tiles[row].length - 1; col >= 0; col--) {
-                if (tiles[row][col].getId() != 0) {
+                if (tiles[row][col].getId() != 1) {
                     Tile2048 tempTile = tiles[row][farthest];
                     tiles[row][farthest] = tiles[row][col];
                     tiles[row][col] = tempTile;
@@ -165,7 +165,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 Tile2048 prevTile = tiles[row - 1][col];
                 Tile2048 currTile = tiles[row][col];
                 if (prevTile.getId() == currTile.getId() & prevTile.getId() != 0) {
-                    tiles[row - 1][col] = new Tile2048(2*prevTile.getBackground());
+                    tiles[row][col - 1] = new Tile2048(prevTile.getBackground() + 1);
                     tiles[row][col] = new Tile2048(0);
                 }
             }
@@ -181,7 +181,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         for (int col = 0; col < Board2048.NUM_COLS; col++) {
             int farthest = 0;
             for (int row = 0; row < Board2048.NUM_ROWS; row++) {
-                if (tiles[row][col].getId() != 0) {
+                if (tiles[row][col].getId() != 1) {
                     Tile2048 tempTile = tiles[row][farthest];
                     tiles[row][farthest] = tiles[row][col];
                     tiles[row][col] = tempTile;
@@ -200,7 +200,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 Tile2048 prevTile = tiles[row + 1][col];
                 Tile2048 currTile = tiles[row][col];
                 if (prevTile.getId() == currTile.getId() & prevTile.getId() != 0) {
-                    tiles[row + 1][col] = new Tile2048(2*prevTile.getBackground());
+                    tiles[row][col - 1] = new Tile2048(prevTile.getBackground() + 1);
                     tiles[row][col] = new Tile2048(0);
                 }
             }
@@ -216,7 +216,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         for (int col = 0; col < Board2048.NUM_COLS; col++) {
             int farthest = Board2048.NUM_ROWS - 1;
             for (int row = Board2048.NUM_ROWS - 1; row >= 0; row--) {
-                if (tiles[row][col].getId() != 0) {
+                if (tiles[row][col].getId() != 1) {
                     Tile2048 tempTile = tiles[row][farthest];
                     tiles[row][farthest] = tiles[row][col];
                     tiles[row][col] = tempTile;
@@ -232,7 +232,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
     private void spawnTile() {
         ArrayList<int[]> emptySpots = getEmptySpots();
         double ran = Math.random();
-        Tile2048 newTile = ran >= 0.8 ? new Tile2048(4) : new Tile2048(2);
+        Tile2048 newTile = ran >= 0.8 ? new Tile2048(2) : new Tile2048(1);
         int ranIndex = new Random().nextInt(emptySpots.size());
         this.tiles[emptySpots.get(ranIndex)[0]][emptySpots.get(ranIndex)[1]] = newTile;
     }
