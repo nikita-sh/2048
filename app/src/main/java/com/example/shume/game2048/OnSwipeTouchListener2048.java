@@ -16,6 +16,7 @@ import android.view.View.OnTouchListener;
 public class OnSwipeTouchListener2048 implements OnTouchListener {
 
     private final GestureDetector gestureDetector;
+    private BoardManager2048 boardManager2048;
 
     public OnSwipeTouchListener2048(Context context) {
         gestureDetector = new GestureDetector(context, new GestureListener());
