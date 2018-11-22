@@ -19,7 +19,7 @@ public class Tile2048 implements Comparable<Tile2048>, Serializable {
      */
     private int id;
 
-    private int value;
+    private int exponent;
 
     /**
      * Return the background id.
@@ -29,6 +29,8 @@ public class Tile2048 implements Comparable<Tile2048>, Serializable {
     public int getBackground() {
         return background;
     }
+
+    public int getExponent() {return this.exponent;}
 
     /**
      * Return the tile id.
@@ -48,16 +50,18 @@ public class Tile2048 implements Comparable<Tile2048>, Serializable {
     Tile2048(int id, int background) {
         this.id = id;
         this.background = background;
+        this.exponent = background;
     }
 
     /**
      * A tile with a background id; look up and set the id.
      *
-     * @param backgroundId
+     * @param exponent
      */
-    Tile2048(int backgroundId) {
-        id = (int) Math.pow(2, backgroundId);
-        tile(backgroundId);
+    Tile2048(int exponent) {
+        this.exponent = exponent;
+        id = (int) Math.pow(2, exponent);
+        tile(exponent);
     }
 
     /**
@@ -69,7 +73,7 @@ public class Tile2048 implements Comparable<Tile2048>, Serializable {
         Object[] pics = {R.drawable.block_blank, R.drawable.block_2, R.drawable.block_4, R.drawable.block_8,
                 R.drawable.block_16, R.drawable.block_32, R.drawable.block_64, R.drawable.block_128, R.drawable.block_256,
                 R.drawable.block_512, R.drawable.block_1024, R.drawable.block_2048, R.drawable.block_4096};
-        background = (int) pics[backgroundId];
+        this.background = (int) pics[backgroundId];
     }
 
     @Override

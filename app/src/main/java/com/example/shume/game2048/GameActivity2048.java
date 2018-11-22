@@ -123,13 +123,11 @@ public class GameActivity2048 extends AppCompatActivity implements Observer {
         tileButtons = new ArrayList<>();
         for (int row = 0; row != Board2048.NUM_ROWS; row++) {
             for (int col = 0; col != Board2048.NUM_COLS; col++) {
-                System.out.println(board.getTile(row, col).getId());
                 Button tmp = new Button(context);
                 tmp.setBackgroundResource(board.getTile(row, col).getBackground());
                 this.tileButtons.add(tmp);
             }
         }
-        System.out.println(boardManager.getBoard().tiles.length);
     }
 
 //    /**
