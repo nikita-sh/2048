@@ -81,7 +81,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
     }
 
     /**
-     * Merges tiles together when a left swipe is intitiated
+     * Merges tiles together when a left swipe is initiated
      */
     public void mergeLeft() {
         pushLeft();

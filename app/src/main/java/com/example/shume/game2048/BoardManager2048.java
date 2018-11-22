@@ -43,42 +43,8 @@ class BoardManager2048 implements Serializable {
         Board2048 board = this.getBoard();
         boolean won = false;
         for (Tile2048 i : board) {
-            won = i.getBackground() >= 2048;
+            won = i.getId() >= 2048;
         }
         return won;
     }
-
-    /**
-     * Return whether any of the four surrounding tiles is the blank tile.
-     *
-     * @param position the tile to check
-     * @return whether the tile at position is surrounded by a blank tile
-     */
-    boolean isValidTap(int position) {
-
-        int row = position / Board2048.NUM_COLS;
-        int col = position % Board2048.NUM_COLS;
-        int blankId = board.numTiles();
-        // Are any of the 4 the blank tile?
-        Tile2048 above = row == 0 ? null : board.getTile(row - 1, col);
-        Tile2048 below = row == Board2048.NUM_ROWS - 1 ? null : board.getTile(row + 1, col);
-        Tile2048 left = col == 0 ? null : board.getTile(row, col - 1);
-        Tile2048 right = col == Board2048.NUM_COLS - 1 ? null : board.getTile(row, col + 1);
-        return (below != null && below.getId() == blankId)
-                || (above != null && above.getId() == blankId)
-                || (left != null && left.getId() == blankId)
-                || (right != null && right.getId() == blankId);
-    }
-
-    /**
-     * Process a touch at position in the board, swapping tiles as appropriate.
-     *
-     * @param position the position
-     */
-    // TODO: Finish touchMove()
-    void touchMove(int position) {
-        int row = position / Board2048.NUM_ROWS;
-        int col = position % Board2048.NUM_COLS;
-    }
-
 }
