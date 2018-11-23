@@ -80,23 +80,26 @@ public class GestureDetectGridView2048 extends GridView {
             mTouchX = ev.getX();
             mTouchY = ev.getY();
         } else {
-
-            if (mFlingConfirmed) {
-                return true;
-            }
-
             float dX = (Math.abs(ev.getX() - mTouchX));
             float dY = (Math.abs(ev.getY() - mTouchY));
             if ((dX > SWIPE_MIN_DISTANCE) || (dY > SWIPE_MIN_DISTANCE)) {
                 mFlingConfirmed = true;
                 if (dX >= dY & dX > 0) {
                     mController.processSwipeMovement(getContext(), 3);
+                    System.out.println("SWIPING - RIGHT");
+                    System.out.println(boardManager.getBoard());
                 } else if (dX > dY & dX <= 0) {
                     mController.processSwipeMovement(getContext(), 1);
+                    System.out.println("SWIPING - LEFT");
+                    System.out.println(boardManager.getBoard());
                 } else if (dY > dX & dY > 0) {
                     mController.processSwipeMovement(getContext(), 2);
+                    System.out.println("SWIPING - UP");
+                    System.out.println(boardManager.getBoard());
                 } else {
                     mController.processSwipeMovement(getContext(), 4);
+                    System.out.println("SWIPING - DOWN");
+                    System.out.println(boardManager.getBoard());
                 }
                 return true;
             }

@@ -60,7 +60,7 @@ public class Tile2048 implements Comparable<Tile2048>, Serializable {
      */
     Tile2048(int exponent) {
         this.exponent = exponent;
-        id = (int) Math.pow(2, exponent);
+        this.id = (int) Math.pow(2, exponent);
         tile(exponent);
     }
 

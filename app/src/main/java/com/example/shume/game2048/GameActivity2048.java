@@ -63,7 +63,7 @@ public class GameActivity2048 extends AppCompatActivity implements Observer {
 
         //final TextView txtValue = findViewById(R.id.NumMoves);
         // txtValue.setText(Integer.toString(getNumMoves()));
-        // gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
+        gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
     }
 
     @Override
@@ -100,6 +100,7 @@ public class GameActivity2048 extends AppCompatActivity implements Observer {
                         display();
                     }
                 });
+
        // switchtoScoreboard();
     }
 
