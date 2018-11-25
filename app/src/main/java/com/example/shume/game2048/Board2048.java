@@ -2,12 +2,12 @@ package com.example.shume.game2048;
 
 import android.service.quicksettings.Tile;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Observable;
-
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -30,6 +30,12 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
     static int NUM_COLS = 4;
 
     /**
+     * Score count
+     */
+    private static int score;
+
+    private static int scoreAdded;
+    /**
      * The tiles on the board in row-major order.
      */
     public Tile2048[][] tiles = new Tile2048[NUM_ROWS][NUM_COLS];
@@ -46,6 +52,22 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         }
         spawnTile();
         spawnTile();
+    }
+
+    /**
+     * Getter for the scoreADDED
+     * @return int
+     */
+    public static int getScoreAdded() {
+        return Board2048.scoreAdded;
+    }
+
+    /**
+     * Getter for the score
+     * @return int
+     */
+    public static int getScore() {
+        return Board2048.score;
     }
 
     /**
@@ -84,6 +106,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
     public void mergeLeft() {
         Tile2048[][] temp1 = makeTempCopy(tiles);
         pushLeft();
+        int tempAdded = score;
         for (int row = 0; row != Board2048.NUM_ROWS; row++) {
             for (int col = 1; col != Board2048.NUM_COLS; col++) {
                 Tile2048 prevTile = tiles[row][col - 1];
@@ -91,9 +114,11 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 if (prevTile.getExponent() == currTile.getExponent() & prevTile.getExponent() != 0) {
                     tiles[row][col - 1] = new Tile2048(prevTile.getExponent() + 1);
                     tiles[row][col] = new Tile2048(0);
+                    addScore(Math.pow(2, prevTile.getExponent()+1));
                 }
             }
         }
+        scoreAdded = getScore() - tempAdded;
         pushLeft();
         if (isSpawnable(temp1, tiles)) {
             spawnTile();
@@ -127,6 +152,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
     public void mergeRight() {
         Tile2048[][] temp1 = makeTempCopy(tiles);
         pushRight();
+        int tempAdded = score;
         for (int row = 0; row < Board2048.NUM_ROWS; row++) {
             for (int col = tiles[row].length - 2; col >= 0; col--) {
                 Tile2048 prevTile = tiles[row][col + 1];
@@ -134,9 +160,11 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 if (prevTile.getExponent() == currTile.getExponent() & prevTile.getExponent() != 0) {
                     tiles[row][col + 1] = new Tile2048(prevTile.getExponent()+1);
                     tiles[row][col] = new Tile2048(0);
+                    addScore(Math.pow(2, prevTile.getExponent()+1));
                 }
             }
         }
+        scoreAdded = getScore() - tempAdded;
         pushRight();
         if (isSpawnable(temp1, tiles)) {
             spawnTile();
@@ -169,6 +197,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
     public void mergeUp() {
         Tile2048[][] temp1 = makeTempCopy(tiles);
         pushUp();
+        int tempAdded = score;
         for (int col = 0; col < Board2048.NUM_COLS; col++) {
             for (int row = 1; row < Board2048.NUM_ROWS; row++) {
                 Tile2048 prevTile = tiles[row - 1][col];
@@ -176,9 +205,11 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 if (prevTile.getExponent() == currTile.getExponent() & prevTile.getExponent() != 0) {
                     tiles[row-1][col] = new Tile2048(prevTile.getExponent()+1);
                     tiles[row][col] = new Tile2048(0);
+                    addScore(Math.pow(2, prevTile.getExponent()+1));
                 }
             }
         }
+        scoreAdded = getScore() - tempAdded;
         pushUp();
         if (isSpawnable(temp1, tiles)) {
             spawnTile();
@@ -211,6 +242,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         // make a copy of the current state as to not mutate it
         Tile2048[][] temp1 = makeTempCopy(tiles);
         pushDown();
+        int tempAdded = score;
         for (int col = 0; col < Board2048.NUM_COLS; col++) {
             for (int row = Board2048.NUM_ROWS - 2; row >= 0; row--) {
                 Tile2048 prevTile = tiles[row + 1][col];
@@ -218,15 +250,21 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 if (prevTile.getExponent() == currTile.getExponent() & prevTile.getExponent() != 0) {
                     tiles[row+1][col] = new Tile2048(prevTile.getExponent() + 1);
                     tiles[row][col] = new Tile2048(0);
+                    addScore(Math.pow(2, prevTile.getExponent()+1));
                 }
             }
         }
+        scoreAdded = getScore() - tempAdded;
         pushDown();
         if (isSpawnable(temp1, tiles)) {
             spawnTile();
         }
         setChanged();
         notifyObservers();
+    }
+
+    private void addScore(double pow) {
+        Board2048.score += pow;
     }
 
     /**

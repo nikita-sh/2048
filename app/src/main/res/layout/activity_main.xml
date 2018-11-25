@@ -21,6 +21,26 @@
         android:visibility="visible"
         tools:context="com.example.shume.game2048.GameActivity2048" />
 
+    <TextView
+        android:id="@+id/NumMoves2048"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:text="TextView"
+        android:textSize="55sp" />
+
+    <!--<TextView-->
+        <!--android:id="@+id/NumMoves2048"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginBottom="568dp"-->
+        <!--android:text="Score Count"-->
+        <!--android:textSize="55sp" />-->
+
     <!--<Button-->
         <!--android:id="@+id/undoButton"-->
         <!--android:layout_width="90dp"-->
