@@ -420,16 +420,20 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         }
 
         @Override
-        public boolean hasNext() {return row < Board2048.NUM_ROWS - 1 & col < Board2048.NUM_COLS - 1;}
+        public boolean hasNext() {
+            return !(row == Board2048.NUM_ROWS);
+        }
 
         @Override
         public Tile2048 next() {
             Tile2048 returnTile = this.tiles[row][col];
+            boolean colInvalid = col == Board2048.NUM_COLS - 1;
             if (!hasNext()) {
-                throw new NoSuchElementException();
-            } else if (col == Board2048.NUM_COLS) {
-                row++;
+                throw new NoSuchElementException("At the end of the 2048 board!");
+            }
+            if (colInvalid) {
                 col = 0;
+                row++;
             } else {
                 col++;
             }
