@@ -97,7 +97,6 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         }
         pushLeft();
         spawnTile();
-        notifyObservers();
     }
 
     /**
@@ -117,6 +116,8 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 }
             }
         }
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -136,7 +137,6 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         }
         pushRight();
         spawnTile();
-        notifyObservers();
     }
 
     /**
@@ -155,6 +155,8 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 }
             }
         }
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -174,7 +176,6 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         }
         pushUp();
         spawnTile();
-        notifyObservers();
     }
 
     /**
@@ -192,6 +193,8 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 }
             }
         }
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -210,7 +213,6 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         }
         pushDown();
         spawnTile();
-        notifyObservers();
     }
 
     /**
@@ -228,6 +230,8 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 }
             }
         }
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -239,7 +243,10 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         Tile2048 newTile = ran >= 0.8 ? new Tile2048(2) : new Tile2048(1);
         int ranIndex = new Random().nextInt(emptySpots.size());
         this.tiles[emptySpots.get(ranIndex)[0]][emptySpots.get(ranIndex)[1]] = newTile;
+        setChanged();
+        notifyObservers();
     }
+
 
     /**
      * Returns an array of all of the empty spots in the board
