@@ -29,12 +29,7 @@ class BoardManager2048 implements Serializable {
     }
 
     BoardManager2048() {
-        List<Tile2048> tiles = new ArrayList<>();
-        final int numTiles = Board2048.NUM_ROWS * Board2048.NUM_COLS;
-        for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-            tiles.add(new Tile2048(0));
-        }
-        this.board = new Board2048(tiles);
+        this.board = new Board2048();
     }
 
     /**
