@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -55,8 +57,8 @@ public class GameActivity2048 extends AppCompatActivity implements Observer {
     public void display() {
         updateTileButtons();
 
-        //final TextView txtValue = findViewById(R.id.NumMoves);
-        // txtValue.setText(Integer.toString(getNumMoves()));
+//        final TextView txtValue = findViewById(R.id.NumMoves2048);
+//        txtValue.setText(Integer.toString(Board2048.getScore()));
         gridView.setAdapter(new CustomAdapter2048(tileButtons, columnWidth, columnHeight));
     }
 
@@ -215,6 +217,7 @@ public class GameActivity2048 extends AppCompatActivity implements Observer {
     public void update(Observable o, Object arg) {
         //autoSave(StartingActivity2048.SAVE_FILENAME);
         display();
+        Toast.makeText(this, "+" + Integer.toString(Board2048.getScoreAdded()), Toast.LENGTH_SHORT).show();
     }
 }
 

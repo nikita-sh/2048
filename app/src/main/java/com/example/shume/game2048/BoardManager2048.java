@@ -20,6 +20,11 @@ class BoardManager2048 implements Serializable {
     private Board2048 board;
 
     /**
+     * Score count
+     */
+    private static int score = 0;
+
+    /**
      * Manage a default (3 undos allowed) board that has been pre-populated.
      *
      * @param board the board
@@ -44,6 +49,25 @@ class BoardManager2048 implements Serializable {
         return board;
     }
 
+    public static void resetScore() {
+        score = 0;
+    }
+
+    /**
+     * Getter for the score
+     * @return int
+     */
+    public static int getScore() {
+        return score;
+    }
+
+    private void addScore(double pow) {
+        score += pow;
+    }
+
+    public static void setNumMoves(int numMoves) {
+        BoardManager2048.score = numMoves;
+    }
     /**
      * Return whether the tiles are in row-major order.
      *
