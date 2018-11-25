@@ -333,12 +333,12 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
      * @return boolean
      */
     public boolean hasHoles() {
-        boolean flag = true;
+        boolean flag = false;
         outer:
         for (int row = 0; row != Board2048.NUM_ROWS; row++) {
             for (int col = 0; col != Board2048.NUM_COLS; col++) {
                 if (tiles[row][col].getExponent() == 0) {
-                    flag = false;
+                    flag = true;
                     break outer;
                 }
             }
@@ -364,7 +364,8 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         outer:
         for (int row = 0; row != Board2048.NUM_ROWS; row++) {
             for (int col = 0; col != Board2048.NUM_COLS - 1; col++) {
-                if (tiles[row][col].getExponent() == tiles[row][col + 1].getExponent()) {
+                if (tiles[row][col].getExponent() == tiles[row][col + 1].getExponent()
+                        || tiles[row][col].getExponent() == 0 || tiles[row][col + 1].getExponent() == 0) {
                     stuck = false;
                     break outer;
                 }
@@ -382,7 +383,8 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         outer:
         for (int col = 0; col != Board2048.NUM_COLS; col++) {
             for (int row = 0; row != Board2048.NUM_ROWS - 1; row++) {
-                if (tiles[row][col].getBackground() == tiles[row + 1][col].getBackground()) {
+                if (tiles[row][col].getBackground() == tiles[row + 1][col].getBackground()
+                        || tiles[row][col].getExponent() == 0 || tiles[row + 1][col].getExponent() == 0) {
                     stuck = false;
                     break outer;
                 }
