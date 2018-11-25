@@ -220,6 +220,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
      * Merges tiles together when a down swipe is intitiated
      */
     public void mergeDown() {
+        // make a copy of the current state as to not mutate it
         Tile2048[][] temp1 = makeTempCopy(tiles);
         pushDown();
         for (int col = 0; col < Board2048.NUM_COLS; col++) {
@@ -320,11 +321,29 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
     }
 
     /**
+     * Checks if there are any holes in the board
+     * @return boolean
+     */
+    public boolean hasHoles() {
+        boolean flag = true;
+        outer:
+        for (int row = 0; row != Board2048.NUM_ROWS; row++) {
+            for (int col = 0; col != Board2048.NUM_COLS; col++) {
+                if (tiles[row][col].getBackground() == 1) {
+                    flag = false;
+                    break outer;
+                }
+            }
+        }
+        return  flag;
+    }
+
+    /**
      * Returns whether or not the board is in a state of no more moves
      * @return boolean
      */
     public boolean isStuck() {
-        return isStuckHorizontal() && isStuckVertical();
+        return !hasHoles() && isStuckHorizontal() && isStuckVertical();
     }
 
     /**
