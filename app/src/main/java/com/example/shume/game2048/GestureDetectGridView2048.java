@@ -15,10 +15,12 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.GridView;
 
+import java.util.Observable;
+
 public class GestureDetectGridView2048 extends GridView {
-    public static final int SWIPE_MIN_DISTANCE = 100;
+    public static final int SWIPE_MIN_DISTANCE = 75;
     public static final int SWIPE_MAX_OFF_PATH = 100;
-    public static final int SWIPE_THRESHOLD_VELOCITY = 100;
+    public static final int SWIPE_THRESHOLD_VELOCITY = 75;
     private GestureDetector gDetector;
     private MovementController2048 mController;
     private boolean mFlingConfirmed = false;
@@ -80,19 +82,19 @@ public class GestureDetectGridView2048 extends GridView {
             mTouchX = ev.getX();
             mTouchY = ev.getY();
         } else {
-            float dX = (Math.abs(ev.getX() - mTouchX));
-            float dY = (Math.abs(ev.getY() - mTouchY));
+            float dX = ev.getX() - mTouchX;
+            float dY = ev.getY() - mTouchY;
             if ((dX > SWIPE_MIN_DISTANCE) || (dY > SWIPE_MIN_DISTANCE)) {
                 mFlingConfirmed = true;
-                if (dX >= dY & dX > 0) {
+                if (Math.abs(dX) >= Math.abs(dY) & dX > 0) {
                     mController.processSwipeMovement(getContext(), 3);
                     System.out.println("SWIPING - RIGHT");
                     System.out.println(boardManager.getBoard());
-                } else if (dX > dY & dX <= 0) {
+                } else if (Math.abs(dX) >= Math.abs(dY) & dX <= 0) {
                     mController.processSwipeMovement(getContext(), 1);
                     System.out.println("SWIPING - LEFT");
                     System.out.println(boardManager.getBoard());
-                } else if (dY > dX & dY > 0) {
+                } else if (Math.abs(dY) >= Math.abs(dX) & dY <= 0) {
                     mController.processSwipeMovement(getContext(), 2);
                     System.out.println("SWIPING - UP");
                     System.out.println(boardManager.getBoard());

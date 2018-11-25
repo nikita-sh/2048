@@ -97,6 +97,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         }
         pushLeft();
         spawnTile();
+        notifyObservers();
     }
 
     /**
@@ -128,13 +129,14 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 Tile2048 prevTile = tiles[row][col + 1];
                 Tile2048 currTile = tiles[row][col];
                 if (prevTile.getId() == currTile.getId() & prevTile.getId() != 1) {
-                    tiles[row][col + 1] = new Tile2048(prevTile.getExponent());
+                    tiles[row][col + 1] = new Tile2048(prevTile.getExponent()+1);
                     tiles[row][col] = new Tile2048(0);
                 }
             }
         }
         pushRight();
         spawnTile();
+        notifyObservers();
     }
 
     /**
@@ -172,6 +174,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         }
         pushUp();
         spawnTile();
+        notifyObservers();
     }
 
     /**
@@ -207,6 +210,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         }
         pushDown();
         spawnTile();
+        notifyObservers();
     }
 
     /**

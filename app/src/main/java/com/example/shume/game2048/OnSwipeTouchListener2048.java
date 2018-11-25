@@ -64,5 +64,6 @@ public class OnSwipeTouchListener2048 implements OnTouchListener {
             }
             return false;
         }
+
     }
 }
