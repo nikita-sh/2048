@@ -334,7 +334,6 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
      * @return boolean
      */
     public boolean isStuck() {
-        System.out.println(!hasHoles() && isStuckHorizontal() && isStuckVertical());
         return !hasHoles() && isStuckHorizontal() && isStuckVertical();
     }
 
