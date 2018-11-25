@@ -80,10 +80,21 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         return tiles[row][col];
     }
 
+    public Tile2048[][] makeTempCopy(Tile2048[][] tiles) {
+        //        Tile2048[][] temp = System.arraycopy(tiles);
+        Tile2048[][] temp = new Tile2048[NUM_ROWS][NUM_COLS];
+        for (int row = 0; row < Board2048.NUM_ROWS; row++) {
+            for (int col = 0; col < Board2048.NUM_COLS; col++) {
+                temp[row][col] = tiles[row][col];
+            }
+        }
+        return temp;
+    }
     /**
      * Merges tiles together when a left swipe is initiated
      */
     public void mergeLeft() {
+        Tile2048[][] temp1 = makeTempCopy(tiles);
         pushLeft();
         for (int row = 0; row != Board2048.NUM_ROWS; row++) {
             for (int col = 1; col != Board2048.NUM_COLS; col++) {
@@ -96,7 +107,9 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
             }
         }
         pushLeft();
-        spawnTile();
+        if (isSpawnable(temp1, tiles)) {
+            spawnTile();
+        }
     }
 
     /**
@@ -124,6 +137,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
      * Merges tiles together when a right swipe is intitiated
      */
     public void mergeRight() {
+        Tile2048[][] temp1 = makeTempCopy(tiles);
         pushRight();
         for (int row = 0; row < Board2048.NUM_ROWS; row++) {
             for (int col = tiles[row].length - 2; col >= 0; col--) {
@@ -136,7 +150,9 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
             }
         }
         pushRight();
-        spawnTile();
+        if (isSpawnable(temp1, tiles)) {
+            spawnTile();
+        }
     }
 
     /**
@@ -163,6 +179,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
      * Merges tiles together when a upwards swipe is intitiated
      */
     public void mergeUp() {
+        Tile2048[][] temp1 = makeTempCopy(tiles);
         pushUp();
         for (int col = 0; col < Board2048.NUM_COLS; col++) {
             for (int row = 1; row < Board2048.NUM_ROWS; row++) {
@@ -175,7 +192,9 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
             }
         }
         pushUp();
-        spawnTile();
+        if (isSpawnable(temp1, tiles)) {
+            spawnTile();
+        }
     }
 
     /**
@@ -199,7 +218,9 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
 
     /**
      * Merges tiles together when a down swipe is intitiated
-     */    public void mergeDown() {
+     */
+    public void mergeDown() {
+        Tile2048[][] temp1 = makeTempCopy(tiles);
         pushDown();
         for (int col = 0; col < Board2048.NUM_COLS; col++) {
             for (int row = Board2048.NUM_ROWS - 2; row >= 0; row--) {
@@ -212,7 +233,9 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
             }
         }
         pushDown();
-        spawnTile();
+        if (isSpawnable(temp1, tiles)) {
+            spawnTile();
+        }
     }
 
     /**
@@ -247,6 +270,19 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         notifyObservers();
     }
 
+    /**
+     * Helper method for checking if a new tile should be spawned
+     */
+    private boolean isSpawnable (Tile2048[][] temp1, Tile2048[][] tiles) {
+        for (int row = 0; row < Board2048.NUM_ROWS; row++) {
+            for (int col = 0; col < Board2048.NUM_COLS; col++) {
+                if (temp1[row][col].getBackground() != tiles[row][col].getBackground()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     /**
      * Returns an array of all of the empty spots in the board
