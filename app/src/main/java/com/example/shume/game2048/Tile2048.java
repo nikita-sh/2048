@@ -22,7 +22,7 @@ public class Tile2048 implements Comparable<Tile2048>, Serializable {
     private int exponent;
 
     /**
-     * Return the background id.
+     * Return the background id of the background
      *
      * @return the background id
      */
@@ -30,6 +30,10 @@ public class Tile2048 implements Comparable<Tile2048>, Serializable {
         return background;
     }
 
+    /**
+     * The value on the 2048 tile
+     * @return int
+     */
     public int getExponent() {return this.exponent;}
 
     /**

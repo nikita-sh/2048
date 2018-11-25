@@ -293,7 +293,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         ArrayList empty = new ArrayList();
         for (int row = 0; row != Board2048.NUM_ROWS; row++) {
             for (int col = 0; col != Board2048.NUM_COLS; col++) {
-                if (this.tiles[row][col].getId() == 1) {
+                if (this.tiles[row][col].getExponent() == 0) {
                     int[] pos = {row, col};
                     empty.add(pos);
                 }
@@ -311,7 +311,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         outer:
         for (int row = 0; row != Board2048.NUM_ROWS; row++) {
             for (int col = 0; col != Board2048.NUM_COLS; col++) {
-                if (tiles[row][col].getBackground() >= 2048) {
+                if (tiles[row][col].getExponent() >= 11) {
                     won = true;
                     break outer;
                 }
@@ -319,6 +319,14 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         }
         return won;
     }
+
+    //        for (Tile2048 tile : tiles) {
+//            if (tile.getBackground() == 1) {
+//                flag = false;
+//                break;
+//            }
+//            return flag;
+//        }
 
     /**
      * Checks if there are any holes in the board
@@ -329,7 +337,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         outer:
         for (int row = 0; row != Board2048.NUM_ROWS; row++) {
             for (int col = 0; col != Board2048.NUM_COLS; col++) {
-                if (tiles[row][col].getBackground() == 1) {
+                if (tiles[row][col].getExponent() == 0) {
                     flag = false;
                     break outer;
                 }
@@ -343,6 +351,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
      * @return boolean
      */
     public boolean isStuck() {
+        System.out.println(!hasHoles() && isStuckHorizontal() && isStuckVertical());
         return !hasHoles() && isStuckHorizontal() && isStuckVertical();
     }
 
@@ -355,7 +364,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         outer:
         for (int row = 0; row != Board2048.NUM_ROWS; row++) {
             for (int col = 0; col != Board2048.NUM_COLS - 1; col++) {
-                if (tiles[row][col].getBackground() == tiles[row][col + 1].getBackground()) {
+                if (tiles[row][col].getExponent() == tiles[row][col + 1].getExponent()) {
                     stuck = false;
                     break outer;
                 }
@@ -382,6 +391,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         return stuck;
     }
 
+    // TODO: for debugging purposes, change it back to original string method once done
     @Override
     public String toString() {
         StringBuilder ret = new StringBuilder();
