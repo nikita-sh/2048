@@ -43,11 +43,8 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
 
     /**
      * A new board of tiles in row-major order.
-     * Precondition: len(tiles) == NUM_ROWS * NUM_COLS
-     *
-     * @param tiles the tiles for the board
      */
-    Board2048(List<Tile2048> tiles) {
+    Board2048() {
         for (int row = 0; row != Board2048.NUM_ROWS; row++) {
             for (int col = 0; col != Board2048.NUM_COLS; col++) {
                 Tile2048 tile = new Tile2048(0);
@@ -330,24 +327,6 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
             }
         }
         return empty;
-    }
-
-    /**
-     * Returns whether or not a 2048 (or higher) is reached
-     * @return boolean
-     */
-    public boolean gameWon() {
-        boolean won = false;
-        outer:
-        for (int row = 0; row != Board2048.NUM_ROWS; row++) {
-            for (int col = 0; col != Board2048.NUM_COLS; col++) {
-                if (tiles[row][col].getExponent() >= 11) {
-                    won = true;
-                    break outer;
-                }
-            }
-        }
-        return won;
     }
 
     /**
