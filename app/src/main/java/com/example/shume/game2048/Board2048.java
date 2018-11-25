@@ -35,6 +35,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
     private static int score;
 
     private static int scoreAdded;
+
     /**
      * The tiles on the board in row-major order.
      */

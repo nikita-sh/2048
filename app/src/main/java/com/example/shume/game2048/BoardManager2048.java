@@ -49,8 +49,13 @@ class BoardManager2048 implements Serializable {
         return board;
     }
 
-    public static void resetScore() {
-        score = 0;
+    // TODO: implement this method
+    public void resetScoreAdded() {
+
+    }
+
+    // TODO: implement this method
+    public void resetScore() {
     }
 
     /**

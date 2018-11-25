@@ -57,8 +57,8 @@ public class GameActivity2048 extends AppCompatActivity implements Observer {
     public void display() {
         updateTileButtons();
 
-//        final TextView txtValue = findViewById(R.id.NumMoves2048);
-//        txtValue.setText(Integer.toString(Board2048.getScore()));
+        final TextView txtValue = findViewById(R.id.NumMoves2048);
+        txtValue.setText(Integer.toString(Board2048.getScore()));
         gridView.setAdapter(new CustomAdapter2048(tileButtons, columnWidth, columnHeight));
     }
 
