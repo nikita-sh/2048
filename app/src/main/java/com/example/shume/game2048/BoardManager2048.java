@@ -51,7 +51,7 @@ class BoardManager2048 implements Serializable {
         Board2048 board = this.getBoard();
         boolean won = false;
         for (Tile2048 i : board) {
-            won = i.getId() >= 2048;
+            won = i.getExponent() >= 11;
         }
         return won;
     }
