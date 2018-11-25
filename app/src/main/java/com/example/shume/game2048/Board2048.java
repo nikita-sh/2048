@@ -110,6 +110,8 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         if (isSpawnable(temp1, tiles)) {
             spawnTile();
         }
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -129,8 +131,6 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 }
             }
         }
-        setChanged();
-        notifyObservers();
     }
 
     /**
@@ -153,6 +153,8 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         if (isSpawnable(temp1, tiles)) {
             spawnTile();
         }
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -171,8 +173,6 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 }
             }
         }
-        setChanged();
-        notifyObservers();
     }
 
     /**
@@ -195,6 +195,8 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         if (isSpawnable(temp1, tiles)) {
             spawnTile();
         }
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -204,7 +206,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         for (int col = 0; col < Board2048.NUM_COLS; col++) {
             int farthest = 0;
             for (int row = 0; row < Board2048.NUM_ROWS; row++) {
-                if (tiles[row][col].getExponent() != 1) {
+                if (tiles[row][col].getExponent() != 0) {
                     Tile2048 tempTile = tiles[farthest][col];
                     tiles[farthest][col] = tiles[row][col];
                     tiles[row][col] = tempTile;
@@ -212,8 +214,6 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 }
             }
         }
-        setChanged();
-        notifyObservers();
     }
 
     /**
@@ -237,6 +237,8 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         if (isSpawnable(temp1, tiles)) {
             spawnTile();
         }
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -254,8 +256,6 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
                 }
             }
         }
-        setChanged();
-        notifyObservers();
     }
 
     /**
