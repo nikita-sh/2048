@@ -41,15 +41,6 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
      * @param tiles the tiles for the board
      */
     Board2048(List<Tile2048> tiles) {
-//        Iterator<Tile2048> tIterator = tiles.iterator();
-//
-//        for (int row = 0; row != Board2048.NUM_ROWS; row++) {
-//            for (int col = 0; col != Board2048.NUM_COLS; col++) {
-//                Tile2048 tile = tIterator.next();
-//                this.tiles[row][col] = tile;
-//            }
-//        }
-
         for (int row = 0; row != Board2048.NUM_ROWS; row++) {
             for (int col = 0; col != Board2048.NUM_COLS; col++) {
                 Tile2048 tile = new Tile2048(0);

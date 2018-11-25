@@ -63,24 +63,6 @@ public class StartingActivity2048 extends AppCompatActivity {
         });
     }
 
-//    /**
-//     * Activate the score button.
-//     */
-//    private void addScoreButtonListener() {
-//        Button scoreButton = findViewById(R.id.ScoreButton);
-//        scoreButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                switchToScoreboard();
-//            }
-//        });
-//    }
-
-//    private void switchToScoreboard() {
-//        Intent tmp = new Intent(this, MainListView.class);
-//        startActivity(tmp);
-//    }
-
     /**
      * Activate the load button.
      */
@@ -140,7 +122,7 @@ public class StartingActivity2048 extends AppCompatActivity {
     }
 
     /**
-     * Switch to the GameActivity view to play the game.
+     * Switch to the GameActivity2048 view to play the game.
      */
     private void switchToGame() {
         Intent tmp = new Intent(this, GameActivity2048.class);

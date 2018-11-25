@@ -1,5 +1,7 @@
 package com.example.shume.game2048;
 
+import android.service.quicksettings.Tile;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,8 +52,14 @@ class BoardManager2048 implements Serializable {
     boolean gameWon() {
         Board2048 board = this.getBoard();
         boolean won = false;
-        for (Tile2048 i : board) {
-            won = i.getExponent() >= 11;
+        outer:
+        for (int row=0; row < Board2048.NUM_ROWS; row++) {
+            for (int col=0; col < Board2048.NUM_COLS; col++) {
+                if (board.tiles[row][col].getExponent() >= 11) {
+                    won = true;
+                    break outer;
+                }
+            }
         }
         return won;
     }

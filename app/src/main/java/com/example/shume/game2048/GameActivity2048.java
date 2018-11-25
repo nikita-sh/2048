@@ -2,16 +2,12 @@ package com.example.shume.game2048;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,8 +18,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
-
-import static com.example.shume.game2048.BoardManager2048.*;
 
 /**
  * The game activity.
@@ -63,7 +57,7 @@ public class GameActivity2048 extends AppCompatActivity implements Observer {
 
         //final TextView txtValue = findViewById(R.id.NumMoves);
         // txtValue.setText(Integer.toString(getNumMoves()));
-        gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
+        gridView.setAdapter(new CustomAdapter2048(tileButtons, columnWidth, columnHeight));
     }
 
     @Override
