@@ -268,7 +268,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
     private boolean isSpawnable (Tile2048[][] temp1, Tile2048[][] tiles) {
         for (int row = 0; row < Board2048.NUM_ROWS; row++) {
             for (int col = 0; col < Board2048.NUM_COLS; col++) {
-                if (temp1[row][col].getBackground() != tiles[row][col].getBackground()) {
+                if (temp1[row][col].getExponent() != tiles[row][col].getExponent()) {
                     return true;
                 }
             }
@@ -309,6 +309,27 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
             }
         }
         return won;
+    }
+
+    /**
+     * Checks to see if a merge action was made from the previous to current board state
+     * @return boolean
+     */
+    public boolean madeMerge(Tile2048[][] temp1, Tile2048[][] tiles) {
+        int t1Count = 0;
+        int tCount = 0;
+        for (int row = 0; row < Board2048.NUM_ROWS; row++) {
+            for (int col = 0; col < Board2048.NUM_COLS; col++) {
+                // if it is not an empty tile
+                if (temp1[row][col].getExponent() != 0) {
+                    t1Count++;
+                }
+                if (tiles[row][col].getExponent() != 0) {
+                    tCount++;
+                }
+            }
+        }
+        return isSpawnable(temp1, tiles) && t1Count == tCount;
     }
 
     /**
