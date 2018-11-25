@@ -84,24 +84,29 @@ public class GestureDetectGridView2048 extends GridView {
         } else {
             float dX = ev.getX() - mTouchX;
             float dY = ev.getY() - mTouchY;
-            if ((dX > SWIPE_MIN_DISTANCE) || (dY > SWIPE_MIN_DISTANCE)) {
+            if ((Math.abs(dX) > SWIPE_MIN_DISTANCE) || (Math.abs(dY) > SWIPE_MIN_DISTANCE)) {
                 mFlingConfirmed = true;
-                if (Math.abs(dX) >= Math.abs(dY) & dX > 0) {
-                    mController.processSwipeMovement(getContext(), 3);
-                    System.out.println("SWIPING - RIGHT");
-                    System.out.println(boardManager.getBoard());
-                } else if (Math.abs(dX) >= Math.abs(dY) & dX <= 0) {
-                    mController.processSwipeMovement(getContext(), 1);
-                    System.out.println("SWIPING - LEFT");
-                    System.out.println(boardManager.getBoard());
-                } else if (Math.abs(dY) >= Math.abs(dX) & dY <= 0) {
-                    mController.processSwipeMovement(getContext(), 2);
-                    System.out.println("SWIPING - UP");
-                    System.out.println(boardManager.getBoard());
-                } else {
-                    mController.processSwipeMovement(getContext(), 4);
-                    System.out.println("SWIPING - DOWN");
-                    System.out.println(boardManager.getBoard());
+                if (Math.abs(dX) >= Math.abs(dY)) {
+                    if (dX > 0) {
+                        mController.processSwipeMovement(getContext(), 3);
+                        System.out.println("SWIPING - RIGHT");
+                        System.out.println(boardManager.getBoard());
+                    } else {
+                        mController.processSwipeMovement(getContext(), 1);
+                        System.out.println("SWIPING - LEFT");
+                        System.out.println(boardManager.getBoard());
+                    }
+                }
+                else if (Math.abs(dY) >= Math.abs(dX)){
+                    if (dY <= 0) {
+                        mController.processSwipeMovement(getContext(), 2);
+                        System.out.println("SWIPING - UP");
+                        System.out.println(boardManager.getBoard());
+                    } else {
+                        mController.processSwipeMovement(getContext(), 4);
+                        System.out.println("SWIPING - DOWN");
+                        System.out.println(boardManager.getBoard());
+                    }
                 }
                 return true;
             }
