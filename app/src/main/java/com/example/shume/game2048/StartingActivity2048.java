@@ -57,6 +57,7 @@ public class StartingActivity2048 extends AppCompatActivity {
             public void onClick(View v) {
                 //switchToSettings();
                 //set user score to zero
+                boardManager = new BoardManager2048();
                 switchToGame();
             }
         });

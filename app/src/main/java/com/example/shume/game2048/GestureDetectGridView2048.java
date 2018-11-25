@@ -111,7 +111,6 @@ public class GestureDetectGridView2048 extends GridView {
                 return true;
             }
         }
-
         return super.onInterceptTouchEvent(ev);
     }
 

@@ -55,4 +55,5 @@ class BoardManager2048 implements Serializable {
         }
         return won;
     }
+
 }
