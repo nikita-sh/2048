@@ -73,7 +73,7 @@ public class GameActivity2048 extends AppCompatActivity implements Observer {
         super.onCreate(savedInstanceState);
         loadFromFile(StartingActivity2048.TEMP_SAVE_FILENAME);
         createTileButtons(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_2048);
 
         // Add View to activity
         gridView = findViewById(R.id.grid);
