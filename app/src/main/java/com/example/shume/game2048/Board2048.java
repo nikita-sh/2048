@@ -121,9 +121,7 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
         }
         scoreAdded = getScore() - tempAdded;
         pushLeft();
-        if (isSpawnable(temp1, tiles)) {
-            spawnTile();
-        }
+        if (isSpawnable(temp1, tiles)) {spawnTile();}
         setChanged();
         notifyObservers();
     }

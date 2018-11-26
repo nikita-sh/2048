@@ -83,13 +83,28 @@ public class TestBoard2048 {
     }
 
     @Test
-    public void testNumTiles() {}
+    public void testNumTiles() {
+        setUp();
+        assertEquals(16, board.numTiles());
+        tearDown();
+    }
 
     @Test
-    public void testGetTile() {}
+    public void testGetTile() {
+        setUp();
+        Tile2048 exp = new Tile2048(0);
+        board.tiles[0][0] = exp;
+        assertEquals(exp, board.getTile(0, 0));
+        tearDown();
+    }
 
     @Test
-    public void testMakeTempCopy() {}
+    public void testMakeTempCopy() {
+        setUp();
+        Tile2048[][] copy = board.makeTempCopy(board.tiles);
+        assertNotEquals(copy, this.board);
+        tearDown();
+    }
 
     @Test
     public void testPushLeft() {}
@@ -104,13 +119,43 @@ public class TestBoard2048 {
     public void testPushDown() {}
 
     @Test
-    public void testSpawnTile() {}
+    public void testSpawnTile() {
+        setUp();
+        boolean exp = false;
+        int count = 0;
+        outer:
+        for (int row = 0; row != Board2048.NUM_ROWS; row++) {
+            for (int col = 0; col != Board2048.NUM_COLS; col++) {
+                if ((board.tiles[row][col].getExponent() != 0) & count == 2) {
+                    exp = true;
+                    break outer;
+                } else {
+                    count++;
+                }
+            }
+        }
+        assertTrue(exp);
+        tearDown();
+    }
 
     @Test
     public void testIsSpawnable() {}
 
     @Test
-    public void testGetEmptySpots() {}
+    public void testGetEmptySpots() {
+        setUp();
+        int[] expSpot = {2, 2};
+        for (int row = 0; row != Board2048.NUM_ROWS; row++) {
+            for (int col = 0; col != Board2048.NUM_COLS; col++) {
+                if (row != 2 & col != 2) {
+                    board.tiles[row][col] = new Tile2048(1);
+                }
+            }
+        }
+        int[] act = board.getEmptySpots()[0];
+        assertArrayEquals(expSpot, act);
+        tearDown();
+    }
 
     @Test
     public void testHasHoles() {}
