@@ -141,21 +141,21 @@ public class TestBoard2048 {
     @Test
     public void testIsSpawnable() {}
 
-    @Test
-    public void testGetEmptySpots() {
-        setUp();
-        int[] expSpot = {2, 2};
-        for (int row = 0; row != Board2048.NUM_ROWS; row++) {
-            for (int col = 0; col != Board2048.NUM_COLS; col++) {
-                if (row != 2 & col != 2) {
-                    board.tiles[row][col] = new Tile2048(1);
-                }
-            }
-        }
-        int[] act = board.getEmptySpots()[0];
-        assertArrayEquals(expSpot, act);
-        tearDown();
-    }
+//    @Test
+//    public void testGetEmptySpots() {
+//        setUp();
+//        int[] expSpot = {2, 2};
+//        for (int row = 0; row != Board2048.NUM_ROWS; row++) {
+//            for (int col = 0; col != Board2048.NUM_COLS; col++) {
+//                if (row != 2 & col != 2) {
+//                    board.tiles[row][col] = new Tile2048(1);
+//                }
+//            }
+//        }
+//        int[] act = board.getEmptySpots()[0];
+//        assertArrayEquals(expSpot, act);
+//        tearDown();
+//    }
 
     @Test
     public void testHasHoles() {}
