@@ -72,6 +72,13 @@ public class Board2048 extends Observable implements Serializable, Iterable<Tile
     }
 
     /**
+     * Resets the number of moves at the beginning of a game
+     */
+    public static void resetNumMoves() {
+        score = 0;
+    }
+
+    /**
      * Return the number of tiles on the board.
      *
      * @return the number of tiles on the board

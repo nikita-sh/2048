@@ -68,6 +68,7 @@ class BoardManager2048 implements Serializable {
     public static void setNumMoves(int numMoves) {
         BoardManager2048.score = numMoves;
     }
+
     /**
      * Return whether the tiles are in row-major order.
      *
