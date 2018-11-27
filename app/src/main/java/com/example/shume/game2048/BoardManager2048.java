@@ -20,19 +20,8 @@ class BoardManager2048 implements Serializable {
     private Board2048 board;
 
     /**
-     * Score count
+     * Constructor for BoardManager class
      */
-    private static int score = 0;
-
-    /**
-     * Manage a default (3 undos allowed) board that has been pre-populated.
-     *
-     * @param board the board
-     */
-    BoardManager2048(Board2048 board) {
-        this.board = board;
-    }
-
     BoardManager2048() {
         this.board = new Board2048();
     }
@@ -42,31 +31,6 @@ class BoardManager2048 implements Serializable {
      */
     Board2048 getBoard() {
         return board;
-    }
-
-    // TODO: implement this method
-    public void resetScoreAdded() {
-
-    }
-
-    // TODO: implement this method
-    public void resetScore() {
-    }
-
-    /**
-     * Getter for the score
-     * @return int
-     */
-    public static int getScore() {
-        return score;
-    }
-
-    private void addScore(double pow) {
-        score += pow;
-    }
-
-    public static void setNumMoves(int numMoves) {
-        BoardManager2048.score = numMoves;
     }
 
     /**
@@ -89,4 +53,32 @@ class BoardManager2048 implements Serializable {
         return won;
     }
 
+    /**
+     * Indicates whether the current state of the game is over
+     * @return boolean
+     */
+    public boolean gameOver() {
+        return this.board.isStuck();
+    }
+
+    /**
+     * Executes the appropriate move to swiping motion detected
+     * @param direction direction of swipe
+     */
+    public void makeMove(int direction){
+        switch(direction) {
+            case 1:
+                this.board.mergeLeft();
+                break;
+            case 2:
+                this.board.mergeUp();
+                break;
+            case 3:
+                this.board.mergeRight();
+                break;
+            case 4:
+                this.board.mergeDown();
+                break;
+        }
+    }
 }

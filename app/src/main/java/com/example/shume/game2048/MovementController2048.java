@@ -36,6 +36,13 @@ public class MovementController2048 {
 //        }
 //    }
 
+    public void recordScore() {
+        String username = UserManager.currentUser;
+        User curruser = LoginActivity.users.getUser(username);
+        int score = Board2048.getScore();
+        curruser.addScore(StartingActivity2048.name, score);
+    }
+
     /**
      * process a swipe
      * @param context
@@ -55,9 +62,11 @@ public class MovementController2048 {
             }
             if (boardManager.gameWon()) {
                 Toast.makeText(context, "YOU WIN! Check out the LEADERBOARD!", Toast.LENGTH_SHORT).show();
+                recordScore();
             }
-        } else {
-            Toast.makeText(context, "GAME OVER!", Toast.LENGTH_SHORT).show();
-        }
+            } else {
+                Toast.makeText(context, "GAME OVER! Check out the LEADERBOARD!", Toast.LENGTH_SHORT).show();
+                recordScore();
+            }
     }
 }
